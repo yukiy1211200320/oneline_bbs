@@ -105,6 +105,7 @@
                   <div class="timeline-label">
                       <h2><a href="#"><p><?php echo $result['nickname'] ; ?></p></a> <span><p><?php echo $result['created'] ; ?></p></span></h2>
                       <p><?php echo $result['comment'] ; ?></p>
+                      <a href="delete.php?id=<?php echo $result['id'] ?>" class="btn btn-danger">削除</a>
                   </div>
               </div>
           </article>
