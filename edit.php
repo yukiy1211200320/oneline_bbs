@@ -86,7 +86,7 @@ $dbh = null;
             </div>
           </div>
           <!-- つぶやくボタン -->
-          <button type="submit" class="btn btn-primary col-xs-12" disabled>つぶやく</button>
+          <button type="submit" class="btn btn-primary col-xs-12" disabled>更新</button>
         </form>
       </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
