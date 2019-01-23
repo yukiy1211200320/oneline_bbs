@@ -1,30 +1,28 @@
 <?php
-// 入力内容取得、SQL実行、元の画面に戻る
-        // データベースに接続
-        $dsn = 'mysql:dbname=onelinebbs;host=localhost';
-        $user = 'root';
-        $password='';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->query('SET NAMES utf8');
+// データベースに接続
+$dsn = 'mysql:dbname=onelinebbs;host=localhost';
+$user = 'root';
+$password='';
+$dbh = new PDO($dsn, $user, $password);
+$dbh->query('SET NAMES utf8');
 
-  // 画面に一覧表示する
-        // DBから表示したいデータを取得する
-          // DB接続　上に記述済み
 
-          // SQL書く
-        // 取得したデータを表示する
-        $sql = 'SELECT * FROM posts ORDER BY created DESC' ; //order by=並び順　asc=昇順　desc=降順　省略すると昇順になる
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-        $results = $stmt->fetchAll();
-        // echo '<pre>';
-        // var_dump($results);
-        // echo'<pre>';
+// SQL実行
+$id = htmlspecialchars($_GET['id']);
 
-        // DBを切断
-        $dbh = null;
+$sql = 'SELECT * FROM posts WHERE id =?' ;
+$data = [$id]; 
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// var_dump($user);die();
+
+
+// DB切断
+$dbh = null;
+
 ?>
-
 
 
 <!DOCTYPE html>
@@ -72,59 +70,26 @@
       <!-- 画面左側 -->
       <div class="col-md-4 content-margin-top">
         <!-- form部分 -->
-        <form action="create.php" method="post">
+        <form action="updete.php" method="post">
           <!-- nickname -->
           <div class="form-group">
             <div class="input-group">
-              <input type="text" name="nickname" class="form-control" id="validate-text" placeholder="nickname" required>
+              <input type="text" name="nickname" class="form-control" id="validate-text" placeholder="nickname" required value="<?php echo $user['nickname'] ?>">
               <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
             </div>
           </div>
           <!-- comment -->
           <div class="form-group">
             <div class="input-group" data-validate="length" data-length="4">
-              <textarea type="text" class="form-control" name="comment" id="validate-length" placeholder="comment" required></textarea>
+              <textarea type="text" class="form-control" name="comment" id="validate-length" placeholder="comment" required ><?php echo $user['comment'] ?></textarea>
               <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
             </div>
           </div>
+          <input type="hidden" name="id" value="<?php echo $user['id']?>">
           <!-- つぶやくボタン -->
-          <button type="submit" class="btn btn-primary col-xs-12" disabled>つぶやく</button>
+          <button type="submit" class="btn btn-primary col-xs-12" disabled>更新</button>
         </form>
       </div>
-
-      <!-- 画面右側 -->
-      <div class="col-md-8 content-margin-top">
-        <div class="timeline-centered">
-          <?php foreach ($results as $result): ?>
-          <article class="timeline-entry">
-              <div class="timeline-entry-inner">
-                  <div class="timeline-icon bg-success">
-                      <i class="entypo-feather"></i>
-                      <i class="fa fa-cogs"></i>
-                  </div>
-                  <div class="timeline-label">
-                      <h2><a href="#"><p><?php echo $result['nickname'] ; ?></p></a> <span><p><?php echo $result['created'] ; ?></p></span></h2>
-                      <p><?php echo $result['comment'] ; ?></p>
-                      <a href="edit.php?id=<?php echo $result['id'] ?>" class="btn btn-success">編集</a>
-                      <a href="delete.php?id=<?php echo $result['id'] ?>" class="btn btn-danger">削除</a>
-                  </div>
-              </div>
-          </article>
-          <?php endforeach; ?>
-
-          <article class="timeline-entry begin">
-              <div class="timeline-entry-inner">
-                  <div class="timeline-icon" style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
-                      <i class="entypo-flight"></i> +
-                  </div>
-              </div>
-          </article>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
