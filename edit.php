@@ -70,7 +70,7 @@ $dbh = null;
       <!-- 画面左側 -->
       <div class="col-md-4 content-margin-top">
         <!-- form部分 -->
-        <form action="create.php" method="post">
+        <form action="updete.php" method="post">
           <!-- nickname -->
           <div class="form-group">
             <div class="input-group">
@@ -85,6 +85,7 @@ $dbh = null;
               <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
             </div>
           </div>
+          <input type="hidden" name="id" value="<?php echo $user['id']?>">
           <!-- つぶやくボタン -->
           <button type="submit" class="btn btn-primary col-xs-12" disabled>更新</button>
         </form>
