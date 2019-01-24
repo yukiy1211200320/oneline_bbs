@@ -1,6 +1,7 @@
 <?php
-// 入力内容取得、SQL実行、元の画面に戻る
- require_once('dbconnect.php');
+require_once('function.php');
+$results = getAllPosts();
+
 
   // 画面に一覧表示する
         // DBから表示したいデータを取得する
@@ -8,10 +9,6 @@
 
           // SQL書く
         // 取得したデータを表示する
-        $sql = 'SELECT * FROM posts ORDER BY created DESC' ; //order by=並び順　asc=昇順　desc=降順　省略すると昇順になる
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
-        $results = $stmt->fetchAll();
         // echo '<pre>';
         // var_dump($results);
         // echo'<pre>';
