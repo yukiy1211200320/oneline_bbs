@@ -15,12 +15,14 @@ date_default_timezone_set('Asia/Manila');
        // ユーザーが入力した内容を取得
         $nickname = htmlspecialchars($_POST['nickname']);
         $comment = htmlspecialchars($_POST['comment']);
-        $file_path = 'img/'. $_FILES['img']['name'];
-        // var_dump($nickname,$comment);
 
-        // 画像
-        move_uploaded_file($_FILES['img']['tmp_name'],$file_path);
-        // var_dump(123);die();
+        if ($_FILES['img']['size'] !== 0) {
+            $file_path = 'img/'. $_FILES['img']['name'];
+            // 画像
+            move_uploaded_file($_FILES['img']['tmp_name'],$file_path);   
+        } else {
+            $file_path = 'img/dafault.png';
+        }
 
         //　SQL書く
           $sql = 'INSERT INTO posts (nickname, comment, created, img) VALUES (?,?,?,?)';
