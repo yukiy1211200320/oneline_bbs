@@ -67,7 +67,7 @@
       <!-- 画面左側 -->
       <div class="col-md-4 content-margin-top">
         <!-- form部分 -->
-        <form action="create.php" method="post">
+        <form action="create.php" method="post" enctype="multipart/form-data">
           <!-- nickname -->
           <div class="form-group">
             <div class="input-group">
@@ -80,6 +80,11 @@
             <div class="input-group" data-validate="length" data-length="4">
               <textarea type="text" class="form-control" name="comment" id="validate-length" placeholder="comment" required></textarea>
               <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+            </div>
+            <div class="form-group">
+            <input type="file" name="img" accept="image/*">
+            
+            
             </div>
           </div>
           <!-- つぶやくボタン -->
