@@ -98,9 +98,8 @@
           <?php foreach ($results as $result): ?>
           <article class="timeline-entry">
               <div class="timeline-entry-inner">
-                  <div class="timeline-icon bg-success">
-                      <i class="entypo-feather"></i>
-                      <i class="fa fa-cogs"></i>
+                  <div class="timeline-icon">
+                      <img src=<?php echo $result['img'] ; ?> alt="" style="height:40px">
                   </div>
                   <div class="timeline-label">
                       <h2><a href="#"><p><?php echo $result['nickname'] ; ?></p></a> <span><p><?php echo $result['created'] ; ?></p></span></h2>
