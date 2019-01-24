@@ -67,7 +67,7 @@
       <!-- 画面左側 -->
       <div class="col-md-4 content-margin-top">
         <!-- form部分 -->
-        <form action="create.php" method="post">
+        <form action="create.php" method="post" enctype="multipart/form-data">
           <!-- nickname -->
           <div class="form-group">
             <div class="input-group">
@@ -81,6 +81,11 @@
               <textarea type="text" class="form-control" name="comment" id="validate-length" placeholder="comment" required></textarea>
               <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
             </div>
+            <div class="form-group">
+            <input type="file" name="img" accept="image/*">
+            
+            
+            </div>
           </div>
           <!-- つぶやくボタン -->
           <button type="submit" class="btn btn-primary col-xs-12" disabled>つぶやく</button>
@@ -93,9 +98,8 @@
           <?php foreach ($results as $result): ?>
           <article class="timeline-entry">
               <div class="timeline-entry-inner">
-                  <div class="timeline-icon bg-success">
-                      <i class="entypo-feather"></i>
-                      <i class="fa fa-cogs"></i>
+                  <div class="timeline-icon">
+                      <img src=<?php echo $result['img'] ; ?> alt="" style="height:40px">
                   </div>
                   <div class="timeline-label">
                       <h2><a href="#"><p><?php echo $result['nickname'] ; ?></p></a> <span><p><?php echo $result['created'] ; ?></p></span></h2>
