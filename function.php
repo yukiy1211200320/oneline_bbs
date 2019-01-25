@@ -45,6 +45,35 @@ function deletePost()
     // var_dump(124);die();
 }
 
+function getPost()
+{
+    require_once('dbconnect.php');
+
+    $id = htmlspecialchars($_GET['id']);
+
+    $sql = 'SELECT * FROM posts WHERE id =?' ;
+    $data = [$id]; 
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+
+}
+
+function updatePost()
+{
+    require_once('dbconnect.php');
+
+    $id = htmlspecialchars($_POST['id']);
+    $nickname = htmlspecialchars($_POST['nickname']);
+    $comment = htmlspecialchars($_POST['comment']);
+
+    $sql = 'UPDATE posts SET nickname = ?, comment = ? WHERE id = ?';
+    $data = [$nickname,$comment,$id];
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+}
+
 // 関数の定義
 // function plus($a, $b)
 // {
