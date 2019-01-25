@@ -1,22 +1,6 @@
 <?php
-// データベースに接続
-require_once('dbconnect.php');
-
-
-// SQL実行
-$id = htmlspecialchars($_GET['id']);
-
-$sql = 'SELECT * FROM posts WHERE id =?' ;
-$data = [$id]; 
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// var_dump($user);die();
-
-
-// DB切断
-$dbh = null;
+  require_once("function.php");
+  $user = getPost();
 
 ?>
 
