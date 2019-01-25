@@ -1,7 +1,5 @@
 <?php
 
-
-
 // データベースに接続
         $dsn = 'mysql:dbname=onelinebbs;host=localhost';
         $user = 'root';
