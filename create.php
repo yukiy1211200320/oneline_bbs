@@ -10,6 +10,3 @@ require_once("function.php");
 // 画面をbbs2.phpを表示する　リダイレクトする
 header('Location: bbs2.php');
 exit();
-
-
-// 呟く→create→bbs2に戻る
