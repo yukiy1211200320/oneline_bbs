@@ -14,7 +14,7 @@ $results = getAllPosts();
         // echo'<pre>';
 
         // DBを切断
-        $dbh = null;
+
 ?>
 
 

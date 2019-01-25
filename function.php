@@ -10,6 +10,27 @@ function getAllPosts()
     return $stmt->fetchAll();
 }
 
+function creatPost()
+{
+    require_once('dbconnect.php');
+
+    $nickname = htmlspecialchars($_POST['nickname']);
+    $comment = htmlspecialchars($_POST['comment']);
+
+    if ($_FILES['img']['size'] !== 0) {
+        $file_path = 'img/'. $_FILES['img']['name'];
+        // 画像
+        move_uploaded_file($_FILES['img']['tmp_name'],$file_path);   
+    } else {
+        $file_path = 'img/dafault.png';
+    }
+
+    //　SQL書く
+      $sql = 'INSERT INTO posts (nickname, comment, created, img) VALUES (?,?,?,?)';
+      $data = [$nickname, $comment, date('Y-m-d H:i:s'), $file_path];
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute($data);
+}
 
 // 関数の定義
 // function plus($a, $b)
