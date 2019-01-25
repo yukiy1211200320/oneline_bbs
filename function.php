@@ -32,6 +32,19 @@ function creatPost()
       $stmt->execute($data);
 }
 
+function deletePost()
+{
+    $id = htmlspecialchars($_GET['id']);
+    require_once('dbconnect.php');
+
+    $sql = 'DELETE FROM posts WHERE id = ?';
+    $data = [$id];
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+    // var_dump(124);die();
+}
+
 // 関数の定義
 // function plus($a, $b)
 // {
